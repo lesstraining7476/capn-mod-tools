@@ -103,6 +103,10 @@ export const sendPostReport = async (r: ReportResponse) => {
 
     console.log(`Request Body: ${JSON.stringify(payload)}`)
 
+    const spamReportFilter = await settings.get("filterSpamReports");
+
+    if (r.spam && spamReportFilter == "on") return;
+
     const response = await fetch(await settings.get(`webhook${environment}`) as string, {
         method: "POST",
         body: JSON.stringify(payload),
