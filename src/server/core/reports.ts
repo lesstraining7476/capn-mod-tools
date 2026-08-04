@@ -1,4 +1,4 @@
-import { reddit } from "@devvit/web/server";
+import { reddit, settings } from "@devvit/web/server";
 
 export type ReportResponse = {
     reason: string;
@@ -58,6 +58,8 @@ export type DiscordEmbed = {
 
 
 export const sendPostReport = async (r: ReportResponse) => {
+    const environment = await settings.get("environment");
+
     const postAuthor = await reddit.getUserById(r.authorId as `t2_${string}`);
 
     const postUrl = `https://reddit.com${r.postUrl}`;
@@ -81,7 +83,7 @@ export const sendPostReport = async (r: ReportResponse) => {
                 },
                 {
                     name: "Post Created",
-                    value: r.createdAt ? new Date(r.createdAt).toLocaleString() : "No Date" 
+                    value: r.createdAt ? new Date(r.createdAt).toLocaleString("en-US", {"timeZone": "America/Los_Angeles"}) : "No Date" 
                 },
                 {
                     name: "Community",
@@ -101,7 +103,7 @@ export const sendPostReport = async (r: ReportResponse) => {
 
     console.log(`Request Body: ${JSON.stringify(payload)}`)
 
-    const response = await fetch("https://discord.com/api/webhooks/1534058549112606746/fvmXhx877-_61ygtzuqOjxPG09arI7-38J2jwdrIAKXSNyEEE41v7lx9Qi6KcL03Sqjn", {
+    const response = await fetch(await settings.get(`webhook${environment}`) as string, {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {

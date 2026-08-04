@@ -16,35 +16,49 @@
     "subreddit": "capn_mod_tools_dev"
   },
   "settings": {
-    "environment": {
-      "type": "select",
-      "label": "Environment",
-      "options": [
-        {
-          "label": "Production",
-          "value": "production"
-        },
-        {
-          "label": "Development",
-          "value": "dev"
-        }
-      ],
-      "defaultValue": "dev"
+    "global": {
+      "webhookDevelopment": {
+        "type": "string",
+        "label": "Discord Webhook URL (Development)",
+        "isSecret": true
+      },
+      "webhookProduction": {
+        "type": "string",
+        "label": "Discord Webhook URL (Production)",
+        "isSecret": true
+      }
     },
-    "filterSpamReports": {
-      "type": "select",
-      "label": "Filter Spam Reports",
-      "options": [
-        {
-          "label": "On",
-          "value": true
-        },
-        {
-          "label": "Off",
-          "value": false
-        }
-      ],
-      "defaultValue": true
+    "subreddit": {
+      "filterSpamReports": {
+        "type": "select",
+        "label": "Filter Spam Reports",
+        "options": [
+          {
+            "label": "On",
+            "value": "on"
+          },
+          {
+            "label": "Off",
+            "value": "off"
+          }
+        ],
+        "defaultValue": "on"
+      },
+      "environment": {
+        "type": "select",
+        "label": "Application Environment",
+        "options": [
+          {
+            "label": "Production",
+            "value": "Production"
+          },
+          {
+            "label": "Development",
+            "value": "Development"
+          }
+        ],
+        "defaultValue": "Development"
+      }
     }
   }
 }
