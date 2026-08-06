@@ -69,6 +69,8 @@ export default defineConfig([
       'eslint.config.js',
       '**/vite.config.ts',
       'devvit.config.ts',
+      '**/zlib-sync.d.ts',
+      'src/zlib-sync.d.ts'
     ],
     languageOptions: {
       parserOptions: {

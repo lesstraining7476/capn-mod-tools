@@ -5,4 +5,8 @@ import { devvit } from '@devvit/start/vite';
 
 export default defineConfig({
   plugins: [react(), tailwind(), devvit()],
+  resolve: {
+    alias: {
+    }
+  }
 });

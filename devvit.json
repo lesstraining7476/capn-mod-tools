@@ -6,7 +6,16 @@
     "entry": "index.cjs"
   },
   "triggers": {
-    "onPostReport": "/internal/triggers/on-post-report"
+    "onPostReport": "/internal/triggers/on-post-report",
+    "onAppInstall": "/internal/triggers/on-app-install"
+  },
+  "scheduler": {
+    "tasks": {
+      "handleModQueue": {
+        "endpoint": "/internal/scheduler/handle-mod-queue",
+        "cron": "*/1 * * * *"
+      }
+    }
   },
   "scripts": {
     "dev": "vite build --watch",
@@ -26,23 +35,47 @@
         "type": "string",
         "label": "Discord Webhook URL (Production)",
         "isSecret": true
+      },
+      "botApplicationId": {
+        "type": "string",
+        "label": "Discord Bot Application Id",
+        "isSecret": true
+      },
+      "botPublicKey": {
+        "type": "string",
+        "label": "Discord Bot Application Id",
+        "isSecret": true
+      },
+      "botToken": {
+        "type": "string",
+        "label": "Discord Bot Token",
+        "isSecret": true
+      },
+      "subredditsDevelopment": {
+        "type": "string",
+        "label": "List of subreddits being managed (Development)",
+        "isSecret": true
+      },
+      "subredditsProduction": {
+        "type": "string",
+        "label": "List of subreddits being managed (Production)",
+        "isSecret": true
+      },
+      "discordModQueueChannelDevelopment": {
+        "type": "string",
+        "label": "Discord Mod Queue Channel (Development)",
+        "isSecret": true
+      },
+      "discordModQueueChannelProduction": {
+        "type": "string",
+        "label": "Discord Mod Queue Channel (Production)",
+        "isSecret": true
       }
     },
     "subreddit": {
       "filterSpamReports": {
-        "type": "select",
-        "label": "Filter Spam Reports",
-        "options": [
-          {
-            "label": "On",
-            "value": "on"
-          },
-          {
-            "label": "Off",
-            "value": "off"
-          }
-        ],
-        "defaultValue": "on"
+        "type": "boolean",
+        "label": "Filter Spam Reports"
       },
       "environment": {
         "type": "select",

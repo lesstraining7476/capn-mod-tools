@@ -1,7 +1,8 @@
 import { Hono } from 'hono';
 import type { OnPostReportRequest, TriggerResponse } from '@devvit/web/shared';
-import { context } from '@devvit/web/server';
+import { context, settings } from '@devvit/web/server';
 import { sendPostReport } from '../core/reports';
+import { ErrorResponse } from '../../shared/api';
 
 export const triggers = new Hono();
 
